@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="eq3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:thing="https://openhab.org/schemas/thing-description/v1.0.0"
+	xsi:schemaLocation="https://openhab.org/schemas/thing-description/v1.0.0 https://openhab.org/schemas/thing-description-1.0.0.xsd">
+
+	<!-- Sample Thing Type -->
+	<thing-type id="eq3-thermostat">
+		<!-- Comment this in for Things which need a Bridge to function.
+			<supported-bridge-type-refs>
+			<bridge-type-ref id="eq3Bridge" />
+			</supported-bridge-type-refs>
+		-->
+
+		<label>eq3 Binding Thing</label>
+		<description>Binding for the eq3 thermostat</description>
+		<category>RadiatorControl</category>
+        
+
+		<channels>
+            <channel id="modeAuto" typeId="modeAutoSwitch" />
+            <channel id="targetTemperature" typeId="setpointTemperature" />
+        </channels> 
+
+        <properties>
+	        <property name="vendor">Equiva</property>
+	        <property name="protocol">Bluetooth</property>
+        </properties>
+        <representation-property>macAddress</representation-property>
+        
+        <!--
+		<config-description>
+			<parameter name="macAddress" type="text" required="true">
+				<context>network-address</context>
+				<label>Hostname</label>
+				<description>MAC address of the device</description>
+			</parameter>
+			<parameter name="refreshInterval" type="integer" unit="s" min="1">
+				<label>Refresh Interval</label>
+				<description>Interval the device is polled in sec.</description>
+			</parameter>
+		</config-description>
+		-->
+		
+	</thing-type>
+
+	<!-- Sample Channel Type -->
+	<channel-type id="modeAutoSwitch">
+        <item-type>Switch</item-type>
+        <label>Mode Auto</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+        <description>Auto mode enables the weekly temperature schedule</description>
+        <category>Switch</category>
+        <tags>
+            <tag>Switchable</tag>
+        </tags>
+        <state readOnly="false"></state>
+    </channel-type>
+    
+	<channel-type id="setpointTemperature">
+		<item-type>Number:Temperature</item-type>
+		<label>Target Temperature</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Desired temperature for this thermostat</description>
+		<category>Temperature</category>
+		<tags>
+            <tag>TargetTemperature</tag>
+        </tags>
+        <state min="5" max="29.5" step="0.5" pattern="%.1f %unit%" readOnly="false"></state>
+	</channel-type>
+</thing:thing-descriptions>
